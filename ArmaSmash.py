@@ -8,6 +8,7 @@ class ArmaSmash(wx.App):
   '''
   def OnInit(self):
     self.main = MainWindow.create(None)
+    self.main.Centre()
     self.main.Show(1)
     self.SetTopWindow(self.main)
     return True
