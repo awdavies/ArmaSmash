@@ -3,6 +3,9 @@ import MainWindow
 modules= {u'MainWindow': [1, 'Main window', 'MainWindow.py']}
 
 class ArmaSmash(wx.App):
+  '''
+  The main class!  This handles all the goods.
+  '''
   def OnInit(self):
     self.main = MainWindow.create(None)
     self.main.Show(1)
