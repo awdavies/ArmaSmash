@@ -7,7 +7,7 @@ class ArmaSmash(wx.App):
   The main class!  This handles all the goods.
   '''
   def OnInit(self):
-    self.main = MainWindow.create(None)
+    self.main = MainWindow.MainWindow(None)
     self.main.Centre()
     self.main.Show(1)
     self.SetTopWindow(self.main)

@@ -4,9 +4,6 @@ import os
 # TODO: Put this into a global module section.
 __ARMA_DIR_FILE__ = "./arma_dir.txt"
 
-def create(parent):
-  return MainWindow(parent)
-
 [wxID_MAIN_WINDOW] = [wx.NewId() for _init_ctrls in range(1)]
 
 class MainWindow(wx.Frame):
