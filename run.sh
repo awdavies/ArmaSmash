@@ -32,4 +32,6 @@ do
       ;;
   esac
 done
+
+# TODO: Check python version.
 python2 ArmaSmash.py
