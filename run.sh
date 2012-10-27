@@ -1,5 +1,5 @@
 #!/bin/bash
-TEST=
+TEST=0
 
 usage() {
   cat << EOF
@@ -14,9 +14,7 @@ usage() {
 EOF
 }
 
-
-
-while getopts "t:h:r" OPTION
+while getopts "tt:h" OPTION
 do
   case $OPTION in
     h)
