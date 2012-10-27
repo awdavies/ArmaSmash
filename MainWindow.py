@@ -1,10 +1,11 @@
 import wx
 import os
+import ModList
 
 # TODO: Put this into a global module section.
 __ARMA_DIR_FILE__ = "./arma_dir.txt"
 
-[wxID_MAIN_WINDOW] = [wx.NewId() for _init_ctrls in range(1)]
+[wxID_MAIN_WINDOW, wxID_MOD_LIST] = [wx.NewId() for _init_ctrls in range(2)]
 
 class MainWindow(wx.Frame):
   '''
@@ -14,22 +15,36 @@ class MainWindow(wx.Frame):
   def __init__(self, parent):
     self._arma_dir = ''
     self._init_components(parent)
-    self._CheckArmaDir()
 
   def _init_components(self, prnt):
     '''
     Initializes all of the components of the window (including any
-    major subcomponents.
+    major subcomponents).
     '''
     super(MainWindow, self).__init__(style=wx.DEFAULT_FRAME_STYLE, \
-                      name='', parent=prnt, title='ArmaSmash', \
-                      pos=(320, 175), size=(853,467))
-    menuBar = wx.MenuBar()
-    fileMenu = wx.Menu()
-    fitem = fileMenu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
-    menuBar.Append(fileMenu, '&File')
-    self.SetMenuBar(menuBar)
+                      name='', \
+                      parent=prnt, \
+                      title='ArmaSmash', \
+                      pos=(320, 175), \
+                      size=(853,467))
+
+    ''' Init Menu '''
+    menu_bar = wx.MenuBar()
+    file_menu = wx.Menu()
+    fitem = file_menu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
+    menu_bar.Append(file_menu, '&File')
+    self.SetMenuBar(menu_bar)
     self.Bind(wx.EVT_MENU, self.OnQuit, fitem)
+
+    ''' Init Mod List Window '''
+    panel = wx.Panel(self)
+    hbox = wx.BoxSizer(wx.HORIZONTAL)
+    self._CheckArmaDir()
+    modlist = ModList.ModList(parent=panel, 
+                              id=wxID_MOD_LIST,
+                              arma_dir=self._arma_dir)
+    hbox.Add(modlist, proportion=1, flag=wx.EXPAND)
+    panel.SetSizer(hbox)
 
   def _CheckArmaDir(self):
     try:
@@ -39,7 +54,7 @@ class MainWindow(wx.Frame):
         self.ShowError('Arma directory invalid.')
         self._GetArmaDir()
     except IOError as e:
-      self.ShowError('Arma directory file not found.')
+      self.ShowError('Arma directory not found.')
       self._GetArmaDir()
 
   def ShowError(self, msg):
@@ -80,7 +95,7 @@ class MainWindow(wx.Frame):
     dial.ShowModal()
     self._arma_dir = dial.GetPath()
 
-    #  Essentially, if they've hit cancel, we'll just kill the program.
+    #  Essentially, if they choose nothing, we'll just kill the program.
     if self._arma_dir == '':
       self.ShowError('Empty Directory.  Exiting...')
       self.OnExit()
@@ -96,18 +111,6 @@ class MainWindow(wx.Frame):
       '''
       self.ShowError("I/O error({0}): {1}".format(e.errno, e.strerror))
       return
-
-  def ReadArmaDir(self):
-    '''
-    This reads in the arma dir and creates the list of valid mod folders
-    that will then be displayed in the mod list on the main tab 
-    (coming.... eventually!)  Right now this does nothing.
-    '''
-    try:
-      f = open(self._arma_dir, 'r')
-    except IOError as e:
-      self.ShowError("I/O error({0}): {1}".format(e.errno, e.strerror))
-      self.OnExit()
 
   def OnQuit(self, e):
     self.Close()
