@@ -17,8 +17,11 @@ class RsyncFolderCheck(unittest.TestCase):
      '''
      Tests to see if the mod properly initializes if there exists
      a folder with a '.rsync' folder inside of it.
+
+     TODO: Need to check for "correct" rsync data.
      '''
      self.mod = Mod("rsync_test_dir")
+
 
 if __name__ == "__main__":
   unittest.main()

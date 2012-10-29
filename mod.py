@@ -1,6 +1,14 @@
 import os
 
 __RSYNC_FOLDER__ = '.rsync'
+__VERSION_FILE__ = '.version.txt'
+
+def create_mod(name, version='1', path=os.getcwd()):
+  '''
+  This (not currently implemented) will create a mod at a specified
+  path, then return the initialized mod after it has been created.
+  '''
+  pass
 
 class Mod():
   '''
@@ -27,20 +35,23 @@ class Mod():
       raise Exception('Supplied path is not a directory: ' + self.path)
     try:
       rsync_dir = filter(lambda x: x == __RSYNC_FOLDER__, os.listdir(self.path))
-      if rsync_dir:
-        '''
-        If there's an rsync directory, then we need to check 
-        for the version and
-        the dependencies within the folder.  If it's all there, 
-        then we assume
-        the mod is valid.  We keep track of whether the mod 
-        is up to date separately
-        from being valid, though a mod cannot be up to 
-        date ever if it isn't valid.
-        '''
-        pass
+      version_file = filter(lambda x: x == __VERSION_FILE__, os.listdir(self.path))
 
+      '''
+      If there's an rsync directory, then we need to check 
+      for the version and
+      the dependencies within the folder.  If it's all there, 
+      then we assume
+      the mod is valid.  We keep track of whether the mod 
+      is up to date separately
+      from being valid, though a mod cannot be up to 
+      date ever if it isn't valid.
+      '''
+      if not rsync_dir:
+        raise Exception("No rsync folder found in directory '{0}'".format(self.path))
+      if not version_file:
+        raise Exception('No version file found in directory "{0}"'.format(self.path))
     except IOError as e:  # For now pass, but we need to handle this properly.
-      pass
+      raise
     except:  # Raise if it's something we don't expect.
       raise
