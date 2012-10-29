@@ -1,7 +1,7 @@
 import os
 
-__RSYNC_FOLDER__ = '.rsync'
-__VERSION_FILE__ = '.version.txt'
+__RSYNC_DIR__ = '.rsync'
+__VERSION_F__ = '.version.txt'
 
 def create_mod(name, version='1', path=os.getcwd()):
   '''
@@ -27,15 +27,12 @@ class Mod():
 
   def __init__(self, path):
     self.path = path
-    self.valid = False
-    self._init_rsync_data()
 
-  def _init_rsync_data(self):
     if not os.path.isdir(self.path):
-      raise Exception('Supplied path is not a directory: ' + self.path)
+      raise Exception('Supplied path is not a directory: ' + path)
     try:
-      rsync_dir = filter(lambda x: x == __RSYNC_FOLDER__, os.listdir(self.path))
-      version_file = filter(lambda x: x == __VERSION_FILE__, os.listdir(self.path))
+      rsync_dir = filter(lambda x: x == __RSYNC_DIR__, os.listdir(path))
+      version_file = filter(lambda x: x == __VERSION_F__, os.listdir(path))
 
       '''
       If there's an rsync directory, then we need to check 
@@ -48,10 +45,15 @@ class Mod():
       date ever if it isn't valid.
       '''
       if not rsync_dir:
-        raise Exception("No rsync folder found in directory '{0}'".format(self.path))
+        raise Exception("No rsync folder found in directory '{0}'".format(path))
       if not version_file:
-        raise Exception('No version file found in directory "{0}"'.format(self.path))
+        raise Exception('No version file found in directory "{0}"'.format(path))
     except IOError as e:  # For now pass, but we need to handle this properly.
       raise
     except:  # Raise if it's something we don't expect.
       raise
+
+    '''
+    Now we have an rsync folder and a version file.  We should get
+    the version of the mod and then (maybe?) verify the rsync data.
+    '''
