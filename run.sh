@@ -40,6 +40,5 @@ done
 if [[ $TEST != 1 ]]; then
   py ArmaSmash.py
 else
-  # Run all tests on anything with the regex following the -m flag.
-  nosetests-2.7 -w tests/ -m [Tt]est
+  nosetests-2.7
 fi

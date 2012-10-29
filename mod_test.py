@@ -1,7 +1,7 @@
 import os
 import sys
 import unittest
-from ..Mod import Mod
+from mod import Mod
 
 class RsyncFolderCheck(unittest.TestCase):
 
@@ -10,8 +10,8 @@ class RsyncFolderCheck(unittest.TestCase):
     Tests to see if the mod properly sends an exception
     if given a folder that doesn't exist.
     '''
-    self.mod = Mod.Mod("cow")
-    pass
+    with self.assertRaises(Exception):
+      self.mod = Mod("cow")
 
 if __name__ == "__main__":
   unittest.main()

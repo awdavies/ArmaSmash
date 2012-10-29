@@ -23,8 +23,8 @@ class Mod():
     self._InitRsyncData()
 
   def _InitRsyncData(self):
-    if not os.isdir(self.path):
-      raise Exception('Supplied path is not a directory: ' + path)
+    if not os.path.isdir(self.path):
+      raise Exception('Supplied path is not a directory: ' + self.path)
     try:
       rsync_dir = filter(lambda x: x == __RSYNC_FOLDER, os.listdir(self.path))
       if rsync_dir:
