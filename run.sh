@@ -1,6 +1,4 @@
 #!/bin/bash
-TEST=0
-
 # For now, this needs to be changed if the python version
 # should be different.
 py() {
@@ -20,6 +18,7 @@ usage() {
 EOF
 }
 
+TEST=0
 while getopts "tt:h" OPTION
 do
   case $OPTION in

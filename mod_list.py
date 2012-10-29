@@ -15,7 +15,7 @@ class ModList(wx.ListCtrl):
     mods = [arma_dir + "/" + mod for mod in mods]
 
     self.InsertColumn(0, 'Name')
-    self.InsertColumn(1, 'Ext')
+    self.InsertColumn(1, 'Version')
     self.InsertColumn(2, 'Size', wx.LIST_FORMAT_RIGHT)
     self.InsertColumn(3, 'Modified')
 
@@ -33,6 +33,7 @@ class ModList(wx.ListCtrl):
       size = os.path.getsize(mod)
       sec = os.path.getmtime(mod)
       self.InsertStringItem(i, name)
+      self.SetStringItem(i, 1, 'v0.001') # all the same version!  ahahaha.
       self.SetStringItem(i, 2, str(size) + ' B')
       self.SetStringItem(i, 3, time.strftime('%Y-%m-%d %H:%M', 
                          time.localtime(sec)))
