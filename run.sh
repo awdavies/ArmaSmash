@@ -1,6 +1,12 @@
 #!/bin/bash
 TEST=0
 
+# For now, this needs to be changed if the python version
+# should be different.
+py() {
+  python2 $@
+}
+
 usage() {
   cat << EOF
   usage: $0 options
@@ -31,5 +37,9 @@ do
   esac
 done
 
-# TODO: Check python version.
-python2 ArmaSmash.py
+if [[ $TEST != 1 ]]; then
+  py ArmaSmash.py
+else
+  # Run all tests on anything with the regex following the -m flag.
+  nosetests-2.7 -w tests/ -m [Tt]est
+fi
