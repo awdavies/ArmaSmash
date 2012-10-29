@@ -20,19 +20,23 @@ class Mod():
   def __init__(self, path):
     self.path = path
     self.valid = False
-    self._InitRsyncData()
+    self._init_rsync_data()
 
-  def _InitRsyncData(self):
+  def _init_rsync_data(self):
     if not os.path.isdir(self.path):
       raise Exception('Supplied path is not a directory: ' + self.path)
     try:
       rsync_dir = filter(lambda x: x == __RSYNC_FOLDER, os.listdir(self.path))
       if rsync_dir:
         '''
-        If there's an rsync directory, then we need to check for the version and
-        the dependencies within the folder.  If it's all there, then we assume
-        the mod is valid.  We keep track of whether the mod is up to date separately
-        from being valid, though a mod cannot be up to date ever if it isn't valid.
+        If there's an rsync directory, then we need to check 
+        for the version and
+        the dependencies within the folder.  If it's all there, 
+        then we assume
+        the mod is valid.  We keep track of whether the mod 
+        is up to date separately
+        from being valid, though a mod cannot be up to 
+        date ever if it isn't valid.
         '''
         pass
 

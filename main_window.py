@@ -34,30 +34,30 @@ class MainWindow(wx.Frame):
     fitem = file_menu.Append(wx.ID_EXIT, 'Quit', 'Quit application')
     menu_bar.Append(file_menu, '&File')
     self.SetMenuBar(menu_bar)
-    self.Bind(wx.EVT_MENU, self.OnQuit, fitem)
+    self.Bind(wx.EVT_MENU, self.on_quit, fitem)
 
     ''' Init Mod List Window '''
     panel = wx.Panel(self)
     hbox = wx.BoxSizer(wx.HORIZONTAL)
-    self._CheckArmaDir()
+    self._check_arma_directory()
     modlist = mod_list.ModList(parent=panel, 
                               id=wxID_MOD_LIST,
                               arma_dir=self._arma_dir)
     hbox.Add(modlist, proportion=1, flag=wx.EXPAND)
     panel.SetSizer(hbox)
 
-  def _CheckArmaDir(self):
+  def _check_arma_directory(self):
     try:
       f = open(__ARMA_DIR_FILE__, "r")
       self._arma_dir = f.read()
       if not os.path.isdir(self._arma_dir):
-        self.ShowError('Arma directory invalid.')
-        self._GetArmaDir()
+        self.show_error('Arma directory invalid.')
+        self._get_arma_dir()
     except IOError as e:
-      self.ShowError('Arma directory not found.')
-      self._GetArmaDir()
+      self.show_error('Arma directory not found.')
+      self._get_arma_dir()
 
-  def ShowError(self, msg):
+  def show_error(self, msg):
       '''
       Simply lets the user know of an error that occurred.
       Perhaps this should be a more global message, since there
@@ -66,7 +66,7 @@ class MainWindow(wx.Frame):
       dial = wx.MessageDialog(self, msg, 'Error', wx.OK | wx.ICON_ERROR)
       dial.ShowModal()
   
-  def _GetArmaDir(self):
+  def _get_arma_dir(self):
     '''
     Gets the arma directory from the supplied folder path.
     TODO: We should probably have some sort of registry read in
@@ -97,7 +97,7 @@ class MainWindow(wx.Frame):
 
     #  Essentially, if they choose nothing, we'll just kill the program.
     if self._arma_dir == '':
-      self.ShowError('Empty Directory.  Exiting...')
+      self.show_error('Empty Directory.  Exiting...')
       self.OnExit()
 
     #  If we're here, then write out the directory to the appropriate file
@@ -109,8 +109,8 @@ class MainWindow(wx.Frame):
       Don't do anything.  We'll just punt it to the user and have them
       deal with it.
       '''
-      self.ShowError("I/O error({0}): {1}".format(e.errno, e.strerror))
+      self.show_error("I/O error({0}): {1}".format(e.errno, e.strerror))
       return
 
-  def OnQuit(self, e):
+  def on_quit(self, e):
     self.Close()
