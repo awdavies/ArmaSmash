@@ -26,7 +26,7 @@ class Mod():
     if not os.path.isdir(self.path):
       raise Exception('Supplied path is not a directory: ' + self.path)
     try:
-      rsync_dir = filter(lambda x: x == __RSYNC_FOLDER, os.listdir(self.path))
+      rsync_dir = filter(lambda x: x == __RSYNC_FOLDER__, os.listdir(self.path))
       if rsync_dir:
         '''
         If there's an rsync directory, then we need to check 
