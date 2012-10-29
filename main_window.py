@@ -98,7 +98,7 @@ class MainWindow(wx.Frame):
     #  Essentially, if they choose nothing, we'll just kill the program.
     if self._arma_dir == '':
       self.show_error('Empty Directory.  Exiting...')
-      self.OnExit()
+      self.on_quit()
 
     #  If we're here, then write out the directory to the appropriate file
     try:

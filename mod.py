@@ -48,7 +48,7 @@ class Mod():
         raise Exception("No rsync folder found in directory '{0}'".format(path))
       if not version_file:
         raise Exception('No version file found in directory "{0}"'.format(path))
-    except IOError as e:  # For now pass, but we need to handle this properly.
+    except IOError as e:  # For now raise; we need to handle this properly.
       raise
     except:  # Raise if it's something we don't expect.
       raise
