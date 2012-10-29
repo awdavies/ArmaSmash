@@ -1,6 +1,6 @@
 import wx
 import os
-import ModList
+import mod_list
 
 # TODO: Put this into a global module section.
 __ARMA_DIR_FILE__ = "./arma_dir.txt"
@@ -40,7 +40,7 @@ class MainWindow(wx.Frame):
     panel = wx.Panel(self)
     hbox = wx.BoxSizer(wx.HORIZONTAL)
     self._CheckArmaDir()
-    modlist = ModList.ModList(parent=panel, 
+    modlist = mod_list.ModList(parent=panel, 
                               id=wxID_MOD_LIST,
                               arma_dir=self._arma_dir)
     hbox.Add(modlist, proportion=1, flag=wx.EXPAND)

@@ -38,7 +38,7 @@ do
 done
 
 if [[ $TEST != 1 ]]; then
-  py ArmaSmash.py
+  py arma_smash.py
 else
   nosetests-2.7
 fi

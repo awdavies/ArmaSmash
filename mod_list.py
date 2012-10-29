@@ -1,7 +1,7 @@
 import wx
 import os
 import time
-import Mod
+import mod
 
 class ModList(wx.ListCtrl):
   def __init__(self, parent, id, arma_dir):
