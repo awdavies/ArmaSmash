@@ -30,9 +30,10 @@ class Mod():
         '''
         pass
 
-    def __init__(self, path, version=None):
+    def __init__(self, path):
         self.path = path
         self.update_info()
+        (self.root, self.name) = os.path.split(path)
 
     def update_info(self):
         version = get_mod_version(self.path)

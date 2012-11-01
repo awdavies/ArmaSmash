@@ -14,13 +14,12 @@ class ModList(wx.ListCtrl):
     list of mods that have been created by one of the other
     modules.
     '''
-    mods = os.listdir(arma_dir)
-    mods = [arma_dir + "/" + mod for mod in mods]
+    mod_paths = os.listdir(arma_dir)
+    mod_paths = [arma_dir + "/" + mod_path for mod_path in mod_paths]
 
     self.InsertColumn(0, 'Name')
     self.InsertColumn(1, 'Version')
-    self.InsertColumn(2, 'Size', wx.LIST_FORMAT_RIGHT)
-    self.InsertColumn(3, 'Modified')
+    self.InsertColumn(2, 'Modified')
 
     '''
     These numbers are abritrary.  Maybe change them later...
@@ -31,17 +30,18 @@ class ModList(wx.ListCtrl):
     self.SetColumnWidth(3, 420)
 
     i = 0
-    for mod in mods:
-      (path, name) = os.path.split(mod)
-      size = os.path.getsize(mod)
-      sec = os.path.getmtime(mod)
-      self.InsertStringItem(i, name)
-      self.SetStringItem(i, 1, 'v0.001') # all the same version!  ahahaha.
-      self.SetStringItem(i, 2, str(size) + ' B')
-      self.SetStringItem(i, 3, time.strftime('%Y-%m-%d %H:%M', 
-                         time.localtime(sec)))
+    for mod_path in mod_paths:
+        try:
+            mod = Mod(mod_path)
+        except Mod.InvalidException:
+            continue
+        sec = os.path.getmtime(mod.path)
+        self.InsertStringItem(i, mod.name)
+        self.SetStringItem(i, 1, unicode(mod.version)) 
+        self.SetStringItem(i, 2, time.strftime('%Y-%m-%d %H:%M', 
+                           time.localtime(sec)))
 
-      if (i % 2) == 0:
-        self.SetItemBackgroundColour(i, '#e6f1f5')
-      i = i + 1
+        if (i % 2) == 0:
+            self.SetItemBackgroundColour(i, '#e6f1f5')
+        i = i + 1
 
