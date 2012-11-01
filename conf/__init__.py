@@ -25,8 +25,7 @@ def check_arma_dir():
                 settings.ARMA_DIR_FILE,
             )
             with open(dir_file, 'r') as f:
-                line = f.readline()
-                print line
+                line = f.readline().strip()
                 if os.path.isdir(line):
                     settings.ARMA_DIR = line
         except:
