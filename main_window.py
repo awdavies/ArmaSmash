@@ -1,6 +1,6 @@
 import wx
 import os
-import mod_list
+from components.observers.panels import ModListPanel
 
 class MainWindow(wx.Frame):
   '''
@@ -32,7 +32,7 @@ class MainWindow(wx.Frame):
     self.Bind(wx.EVT_MENU, self.on_quit, fitem)
 
     ''' Mod List Panel '''
-    self.mod_list_panel = mod_list.ModListPanel(self, -1)
+    self.mod_list_panel = ModListPanel(self, -1)
   
   def on_quit(self, e):
     self.Close()

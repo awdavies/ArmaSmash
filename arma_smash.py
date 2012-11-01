@@ -1,6 +1,5 @@
 import wx
 import main_window
-modules= {u'MainWindow': [1, 'Main window', 'MainWindow.py']}
 
 class ArmaSmash(wx.App):
   '''

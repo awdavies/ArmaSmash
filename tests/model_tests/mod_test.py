@@ -1,7 +1,7 @@
 import os
 import sys
 import unittest
-from mod import Mod
+from components.models import Mod
 
 class RsyncFolderCheck(unittest.TestCase):
 
