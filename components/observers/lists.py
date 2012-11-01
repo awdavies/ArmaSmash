@@ -10,7 +10,9 @@ class ModList(wx.ListCtrl):
 
     ''' 
     For now, just list the elements within the mods folder so
-    we can see them.
+    we can see them.  In the future, we'll simply supply a 
+    list of mods that have been created by one of the other
+    modules.
     '''
     mods = os.listdir(arma_dir)
     mods = [arma_dir + "/" + mod for mod in mods]

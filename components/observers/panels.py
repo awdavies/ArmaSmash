@@ -10,7 +10,13 @@ class ModListPanel(wx.Panel):
         hbox.Add(modlist, proportion=1, flag=wx.EXPAND)
         self.SetSizer(hbox)
 
-    
+'''
+These silly functions need to be moved into their own module somwhere.
+They don't belong here.  Since we're likely going to be going for some
+kind of bastardized MVC setup for the file architecture, there should
+probably be some kind of "controller" module, since we already have a
+model class and an observers class.
+'''
 def _check_arma_directory(self):
     try:
       f = open(__ARMA_DIR_FILE__, "r")
