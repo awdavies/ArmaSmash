@@ -5,8 +5,6 @@ import mod_list
 # TODO: Put this into a global module section.
 __ARMA_DIR_FILE__ = "./arma_dir.txt"
 
-[wxID_MAIN_WINDOW, wxID_MOD_LIST] = [wx.NewId() for _init_ctrls in range(2)]
-
 class MainWindow(wx.Frame):
   '''
   This is, as the name implies, the main window.  This holds all of
@@ -41,8 +39,7 @@ class MainWindow(wx.Frame):
     hbox = wx.BoxSizer(wx.HORIZONTAL)
     self._check_arma_directory()
     modlist = mod_list.ModList(parent=panel, 
-                              id=wxID_MOD_LIST,
-                              arma_dir=self._arma_dir)
+                               arma_dir=self._arma_dir)
     hbox.Add(modlist, proportion=1, flag=wx.EXPAND)
     panel.SetSizer(hbox)
 

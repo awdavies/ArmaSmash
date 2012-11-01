@@ -4,8 +4,8 @@ import time
 import mod
 
 class ModList(wx.ListCtrl):
-  def __init__(self, parent, id, arma_dir):
-    wx.ListCtrl.__init__(self, parent, id, style=wx.LC_REPORT)
+  def __init__(self, parent, arma_dir):
+    wx.ListCtrl.__init__(self, parent, style=wx.LC_REPORT)
 
     ''' 
     For now, just list the elements within the mods folder so
