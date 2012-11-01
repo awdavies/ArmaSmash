@@ -1,5 +1,5 @@
 import os
-from test import get_mod_version
+from util.test import get_mod_version
 
 
 def create_mod(name, version='1', path=os.getcwd()):

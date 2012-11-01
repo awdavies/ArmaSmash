@@ -1,7 +1,7 @@
 import os
 import sys
 import unittest
-from components.test import (
+from util.test import (
     ValidationException,
     _validate_mod_path as v,
     get_mod_version as g

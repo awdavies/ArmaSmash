@@ -8,3 +8,4 @@ Arma 2 Mod Installer/Updater.
 * Nose
 * wxPython
 * Python 2.7
+* Rsync
