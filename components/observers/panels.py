@@ -1,4 +1,5 @@
 import wx
+from conf import settings
 from lists import ModList
 
 class ModListPanel(wx.Panel):
@@ -6,7 +7,7 @@ class ModListPanel(wx.Panel):
     def __init__(self, *args, **kwargs):
         wx.Panel.__init__(self, *args, **kwargs)
         hbox = wx.BoxSizer(wx.HORIZONTAL)
-        modlist = ModList(parent=self, arma_dir=".")
+        modlist = ModList(parent=self, arma_dir=settings.ARMA_DIR)
         hbox.Add(modlist, proportion=1, flag=wx.EXPAND)
         self.SetSizer(hbox)
 
